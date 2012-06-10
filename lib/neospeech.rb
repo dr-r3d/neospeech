@@ -1,5 +1,2 @@
 require "neospeech/version"
-
-module Neospeech
-  # Your code goes here...
-end
+require "neospeech/config"
