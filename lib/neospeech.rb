@@ -1,6 +1,5 @@
 require "neospeech/version"
-require "neospeech/config"
-require "neospeech/conversion"
+require "neospeech/convertor"
 
 module Neospeech
 
