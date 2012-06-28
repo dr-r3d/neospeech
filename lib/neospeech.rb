@@ -1,7 +1,6 @@
 require "neospeech/version"
 require "neospeech/string"
 require "neospeech/convertor"
-require "httparty"
 
 module Neospeech
 

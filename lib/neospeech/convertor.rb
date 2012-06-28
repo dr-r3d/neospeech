@@ -1,3 +1,4 @@
+require "httparty"
 class Neospeech::Convertor
   include ::HTTParty
   base_uri 'https://tts.neospeech.com'
