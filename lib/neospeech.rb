@@ -1,4 +1,5 @@
 require "neospeech/version"
+require "neospeech/string"
 require "neospeech/convertor"
 
 module Neospeech
