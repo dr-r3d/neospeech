@@ -1,5 +1,5 @@
 class Neospeech::Convertor
-  include HTTParty
+  include ::HTTParty
   base_uri 'https://tts.neospeech.com'
   RELATIVE_URL = '/rest_1_1.php'
 
