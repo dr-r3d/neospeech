@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -33,6 +33,7 @@ Before using, you must register with nespeech https://ws.neospeech.com and add a
 This wrapper supports there voices - 'paul', 'kate', 'julie' and comes with built-in string helper to provide a downloadable audio url.
 
     'Hello World'.speak 'kate'
+    #=> "https://tts.neospeech.com/audio/a.php/4682669/a97ec98568f8/result_11.wav"
 
 Any name may be used (single word). If the TTS engine does not supports, kate voice will be used.
 
