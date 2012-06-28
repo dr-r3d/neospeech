@@ -1,3 +1,7 @@
+require "neospeech/version"
+require "neospeech/config"
+require "neospeech/conversion"
+
 module Neospeech
 
   mattr_accessor :email, :account_id, :login_key, :login_password

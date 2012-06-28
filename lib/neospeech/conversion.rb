@@ -1,0 +1,1 @@
+require "neospeech/conversion/simple"
