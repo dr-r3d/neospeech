@@ -1,6 +1,7 @@
 # Neospeech
 
-Ruby wrapper for NeoSpeech Text to Speech API
+Ruby wrapper for NeoSpeech Text to Speech API. Neospeech engine provides highly customizable high quality TTS conversion (http://www.gizmag.com/go/2708/). The gem is written to consume the TTS engine of NeoSpeech as REST Webservice via various helper methods. This is pre-release andt the gem is under active developement. Test cases plus documentation are the next priority.
+
 
 ## Installation
 
