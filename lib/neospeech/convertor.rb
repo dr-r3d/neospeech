@@ -13,8 +13,8 @@ class Neospeech::Convertor
     self
   end
 
-  def queue
-    @response = simple
+  def queue convertor = 'simple'
+    @response = start_conversion(convertor)
     @status = @response['statusCode']
     error = @response['resultCode']
     self
@@ -83,9 +83,9 @@ class Neospeech::Convertor
     response
   end
 
-  def simple
+  def start_conversion name
     options = [::Neospeech.account_auth, ::Neospeech.api_auth, settings, {text: text}].reduce(:merge)
-    body_xml = prepare_xml options, 'ConvertSimple'
+    body_xml = prepare_xml options, conversion_engine(name)
     self.class.post(RELATIVE_URL, body: body_xml).parsed_response['response']
   end
 
@@ -103,5 +103,12 @@ class Neospeech::Convertor
   def prepare_xml options={}, method
     options = options.inject({}) { |h, q| h[q[0].to_s.camelcase(:lower)] = q[1]; h }
     options.to_xml(:skip_instruct => true, :root => method)
+  end
+
+  def conversion_engine name
+    case(name)
+      when 'simple' then 'convertSimple'
+      when 'text' then 'convertText'
+    end
   end
 end
