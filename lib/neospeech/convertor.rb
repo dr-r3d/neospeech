@@ -65,11 +65,11 @@ class Neospeech::Convertor
       when 'normal'
         '100'
       when 'fast'
-        '200'
+        '125'
       when 'very fast'
-        '400'
+        '150'
       else
-        '50'
+        (50..400).member?(value.to_i) ? value.to_s : '50'
     end
   end
 
