@@ -61,11 +61,11 @@ class Neospeech::Convertor
       when 'very slow'
         '50'
       when 'slow'
-        '75'
+        '80'
       when 'normal'
         '100'
       when 'fast'
-        '125'
+        '120'
       when 'very fast'
         '150'
       else
