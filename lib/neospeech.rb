@@ -4,7 +4,7 @@ require "neospeech/convertor"
 
 module Neospeech
 
-  mattr_accessor :email, :account_id, :login_key, :login_password
+  mattr_accessor :email, :account_id, :login_key, :login_password, :engine
 
   def self.setup
     yield self
@@ -22,5 +22,9 @@ module Neospeech
       login_key: login_key,
       login_password: login_password
     }
+  end
+
+  def self.conversion_engine
+    engine
   end
 end
