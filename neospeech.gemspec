@@ -15,4 +15,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Neospeech::VERSION
   gem.add_runtime_dependency 'httparty'
+  gem.add_runtime_dependency 'activesupport'
+  gem.add_runtime_dependency 'builder'
 end
