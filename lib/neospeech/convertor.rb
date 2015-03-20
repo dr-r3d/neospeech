@@ -5,18 +5,19 @@ class Neospeech::Convertor
   RELATIVE_URL = '/rest_1_1.php'
 
   attr_reader :status
-  attr_accessor :audio_file_url, :error, :text, :voice, :speed, :pitch, :volume
+  attr_accessor :audio_file_url, :error, :count, :text, :voice, :speed, :pitch, :volume
 
   def initialize(args)
     args.each { |key, value| send(key.to_s+'=', value) }
     @response = {}
+    @count = 0
     self
   end
 
   def queue convertor = 'simple'
     @response = start_conversion(convertor)
     @status = @response['statusCode']
-    error = @response['resultCode']
+    self.error = @response['resultCode']
     self
   end
 
@@ -25,7 +26,7 @@ class Neospeech::Convertor
   end
 
   def finished?
-   error || success?
+    self.error || self.success? || count > 30
   end
 
   def success?
@@ -38,18 +39,17 @@ class Neospeech::Convertor
       if response['resultCode'] == '0'
         @status = response['statusCode']
         @audio_file_url = response['downloadUrl'] if @status.eql?('4')
-
       end
     end
     @status
   end
 
-  def error= resultCode
-    @error = resultCode.eql?('0') ? nil : resultCode
+  def error=(resultCode)
+    @error = resultCode.eql?('0') ? false : true
   end
 
   def audio_file_url
-    error || @audio_file_url
+    self.error || @audio_file_url
   end
 
   def voice= name
@@ -79,7 +79,8 @@ class Neospeech::Convertor
     options = [::Neospeech.account_auth, {conversionNumber: conversion_number}].reduce(:merge)
     body_xml =  prepare_xml options, 'GetConversionStatus'
     response = self.class.post(RELATIVE_URL, body: body_xml).parsed_response
-    error = response['response']['resultCode']
+    self.error = response['response']['resultCode']
+    @count += 1
     response
   end
 
@@ -97,7 +98,7 @@ class Neospeech::Convertor
       speed: speed,
       volume: volume,
       pitch: pitch
-    }.delete_if {|k,v| v.blank?}
+    }.delete_if {|k,v| (v.nil? || v.empty?)}
   end
 
   def prepare_xml options={}, method
